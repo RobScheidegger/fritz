@@ -14,9 +14,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Dashboard from './dashboard/dashboard'
+import Interactive from './interactive/interactive';
 
 
 export default class Nagivation extends React.Component {
@@ -29,7 +32,9 @@ export default class Nagivation extends React.Component {
     getPage = (pageName) => {
         switch (this.state.page) {
             case 'Dashboard':
-                return <div>Dashboard</div>;
+                return <Dashboard />;
+            case 'Interactive':
+                return <Interactive />;
             case 'Activity':
                 return <div>Activity</div>
             default:
@@ -48,8 +53,12 @@ export default class Nagivation extends React.Component {
           <Divider />
           <List>
               <ListItem button key='Dashboard' onClick={() => this.setPage('Dashboard')}>
-                <ListItemIcon><InboxIcon /></ListItemIcon>
+                <ListItemIcon><DashboardIcon /></ListItemIcon>
                 <ListItemText primary='Dashboard' />
+              </ListItem>
+              <ListItem button key='Interactive' onClick={() => this.setPage('Interactive')}>
+                <ListItemIcon><InboxIcon /></ListItemIcon>
+                <ListItemText primary='Interactive' />
               </ListItem>
               <ListItem button key='Charts' onClick={() => this.setPage('Charts')}>
                 <ListItemIcon><InboxIcon /></ListItemIcon>
@@ -67,7 +76,6 @@ export default class Nagivation extends React.Component {
     render(){
         const renderedPage = this.getPage(this.state.pageName);
         return (
-            <>
             <div style={styles.root}>
                 <CssBaseline />
                 <AppBar position="fixed" style={styles.appBar}>
@@ -90,8 +98,7 @@ export default class Nagivation extends React.Component {
                 <main style={styles.content}>
                     {renderedPage}
                 </main>
-                </div>
-            </>
+            </div>
         );
     }
 }
